@@ -22,6 +22,7 @@ namespace Hangman
         /// </summary>
         public string VisibleWord => SecretWord.GetPartiallySolved(guessedCharacters.Contains);
         ISecretWord SecretWord { get; }
+        public string WholeWord => SecretWord.Word;
         int GuessLimit { get; }
         HashSet<char> guessedCharacters = new HashSet<char>();
 
