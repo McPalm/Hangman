@@ -7,7 +7,7 @@ namespace Hangman
 {
     public class WordGame
     {
-        public int TotalGuesses { get; }
+        public int TotalGuesses => guessedCharacters.Count;
         public IEnumerator<char> GuessedCharacters => guessedCharacters.GetEnumerator();
         /// <summary>
         /// True if the game is over, whenever or not we won
@@ -37,6 +37,7 @@ namespace Hangman
         /// <returns>false if the guess was invalid, such as the character has alredy been guessed or is not a common letter.</returns>
         public bool MakeAGuess(char c)
         {
+            c = Char.ToLower(c);
             if(IsValidCharacter(c) == false)
                 return false;
             if (guessedCharacters.Contains(c))

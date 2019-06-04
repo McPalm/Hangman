@@ -76,7 +76,7 @@ namespace Hangman.Test
         public void TotalGuesses_GuessSameThreeTimes_Returns2()
         {
             Game.MakeAGuess('a');
-            Game.MakeAGuess('a');
+            Game.MakeAGuess('A');
             Game.MakeAGuess('a');
 
             var result = Game.TotalGuesses;
