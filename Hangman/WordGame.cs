@@ -12,8 +12,8 @@ namespace Hangman
         /// <summary>
         /// True if the game is over, whenever or not we won
         /// </summary>
-        public bool GameOver { get; }
-        public bool Solved { get; }
+        public bool GameOver => TotalGuesses >= GuessLimit || Solved;
+        public bool Solved => SecretWord.IsSolvedBy(guessedCharacters.Contains);
         /// <summary>
         /// What we can see so far, just underscores and spaces if nothing is known, and the whole word if completely solved
         /// </summary>
