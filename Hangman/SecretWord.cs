@@ -20,7 +20,15 @@ namespace Hangman
         /// <returns></returns>
         public string GetPartiallySolved(Func<char, bool> CharIsKnown)
         {
-            throw new NotImplementedException();
+            var chars = new char[Word.Length];
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (Word[i] == ' ' || CharIsKnown(Word[i]))
+                    chars[i] = Word[i];
+                else
+                    chars[i] = '_';
+            }
+            return new string(chars);
         }
 
         public bool IsSolvedBy(Func<char, bool> CharIsKnown)

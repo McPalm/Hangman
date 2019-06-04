@@ -13,8 +13,9 @@ namespace Tests
         [TestCase("Hi", "h", "H_")]
         [TestCase("Hi", "i", "_i")]
         [TestCase("Hi", "ih", "Hi")]
-        [TestCase("Tom Bombadil", "body", "_o_ Bo_b_d_l")]
-        public void GetPartiallySolved_HappyPath(string word, string known, string expected)
+        [TestCase("Tom Bombadil", "body", "_o_ Bo_b_d__")]
+        [TestCase("Tom tom", "mot", "Tom tom")]
+        public void GetPartiallySolved(string word, string known, string expected)
         {
             var secretWord = new SecretWord(word);
             var result = secretWord.GetPartiallySolved(KnownCharFunction(known));
