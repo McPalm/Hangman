@@ -45,7 +45,7 @@ namespace Tests
         {
             var secret = new SecretWord(word);
             var result = secret.Contains(letter);
-            Assert.That(result, Is.EqualTo(result));
+            Assert.That(result, Is.EqualTo(expected));
         }
 
         [Test]
