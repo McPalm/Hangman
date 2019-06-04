@@ -9,14 +9,14 @@ namespace Hangman.Test
     [TestFixture]
     class WordGameTests
     {
-        WordGame game { get; set; }
-        Mock<ISecretWord> moqSecretWord { get; set; }
+        WordGame Game { get; set; }
+        Mock<ISecretWord> MoqSecretWord { get; set; }
 
         [SetUp]
         public void SetUp()
         {
-            moqSecretWord = new Mock<ISecretWord>();
-            game = new WordGame(moqSecretWord.Object, 10);
+            MoqSecretWord = new Mock<ISecretWord>();
+            Game = new WordGame(MoqSecretWord.Object, 10);
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace Hangman.Test
         [TestCase('1')]
         public void MakeAGuess_InvalidCharacter_ReturnsFalse(char c)
         {
-            var result = game.MakeAGuess(c);
+            var result = Game.MakeAGuess(c);
             Assert.IsFalse(result);
         }
     }

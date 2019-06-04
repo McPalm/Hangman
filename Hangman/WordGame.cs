@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Hangman
 {
@@ -17,11 +18,13 @@ namespace Hangman
         /// What we can see so far, just underscores and spaces if nothing is known, and the whole word if completely solved
         /// </summary>
         public string VisibleWord { get; }
-
+        public ISecretWord SecretWord { get; }
+        public int GuessLimit { get; }
 
         public WordGame(ISecretWord secretWord, int guessLimit)
         {
-            throw new NotImplementedException();
+            SecretWord = secretWord;
+            GuessLimit = guessLimit;
         }
 
 
@@ -33,8 +36,16 @@ namespace Hangman
         /// <returns>false if the guess was invalid, such as the character has alredy been guessed or is not a common letter.</returns>
         public bool MakeAGuess(char c)
         {
-            throw new NotImplementedException();
+            if(IsValidCharacter(c) == false)
+                return false;
+            return true;
+            // throw new NotImplementedException();
         }
 
+        private bool IsValidCharacter(char c)
+        {
+            return (c >= 'a' && c <= 'z')
+                || (c >= 'A' && c <= 'Z');
+        }
     }
 }
