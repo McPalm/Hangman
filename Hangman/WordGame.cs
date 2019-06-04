@@ -24,7 +24,8 @@ namespace Hangman
         ISecretWord SecretWord { get; }
         public string WholeWord => SecretWord.Word;
         int GuessLimit { get; }
-        HashSet<char> guessedCharacters = new HashSet<char>();
+
+        readonly HashSet<char> guessedCharacters = new HashSet<char>();
 
         public WordGame(ISecretWord secretWord, int guessLimit)
         {

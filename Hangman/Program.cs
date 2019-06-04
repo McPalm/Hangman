@@ -4,7 +4,7 @@ namespace Hangman
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             GameStart();
             CompleteLoop();
