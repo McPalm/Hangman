@@ -23,11 +23,26 @@ namespace Hangman.Test
         [TestCase('/')]
         [TestCase('_')]
         [TestCase('.')]
-        [TestCase('1')]
+        [TestCase('ä')]
         public void MakeAGuess_InvalidCharacter_ReturnsFalse(char c)
         {
             var result = Game.MakeAGuess(c);
             Assert.IsFalse(result);
+        }
+
+        [Test]
+        [TestCase('a')]
+        [TestCase('A')]
+        [TestCase('a')]
+        [TestCase('Z')]
+        [TestCase('r')]
+        [TestCase('d')]
+        [TestCase('s')]
+        [TestCase('y')]
+        public void MakeAGuess_ValidCharacter_ReturnsTrue(char c)
+        {
+            var result = Game.MakeAGuess(c);
+            Assert.IsTrue(result);
         }
     }
 }
