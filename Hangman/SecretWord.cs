@@ -13,6 +13,8 @@ namespace Hangman
             Word = word;
         }
 
+        public bool Contains(char c) => Word.ToLower().Contains(c.ToString().ToLower());
+
         /// <summary>
         /// Returns the string, only showing revealed characters, hidden characters are replaced with a _
         /// </summary>
