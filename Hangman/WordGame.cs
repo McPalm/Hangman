@@ -19,7 +19,7 @@ namespace Hangman
         public string VisibleWord { get; }
 
 
-        public WordGame(SecretWord secretWord)
+        public WordGame(ISecretWord secretWord, int guessLimit)
         {
             throw new NotImplementedException();
         }

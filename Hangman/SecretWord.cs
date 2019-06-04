@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hangman
 {
-    public class SecretWord
+    public class SecretWord : ISecretWord
     {
         public String Word { get; }
 
