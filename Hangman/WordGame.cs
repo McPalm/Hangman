@@ -17,7 +17,7 @@ namespace Hangman
         /// <summary>
         /// What we can see so far, just underscores and spaces if nothing is known, and the whole word if completely solved
         /// </summary>
-        public string VisibleWord { get; }
+        public string VisibleWord => SecretWord.GetPartiallySolved(guessedCharacters.Contains);
         ISecretWord SecretWord { get; }
         int GuessLimit { get; }
         HashSet<char> guessedCharacters = new HashSet<char>();
