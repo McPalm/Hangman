@@ -8,7 +8,7 @@ namespace Hangman
     public class WordGame
     {
         public int TotalGuesses { get; }
-        public IEnumerator<char> GuessedCharacters { get; }
+        public IEnumerator<char> GuessedCharacters => guessedCharacters.GetEnumerator();
         /// <summary>
         /// True if the game is over, whenever or not we won
         /// </summary>
@@ -18,8 +18,9 @@ namespace Hangman
         /// What we can see so far, just underscores and spaces if nothing is known, and the whole word if completely solved
         /// </summary>
         public string VisibleWord { get; }
-        public ISecretWord SecretWord { get; }
-        public int GuessLimit { get; }
+        ISecretWord SecretWord { get; }
+        int GuessLimit { get; }
+        HashSet<char> guessedCharacters = new HashSet<char>();
 
         public WordGame(ISecretWord secretWord, int guessLimit)
         {
@@ -38,8 +39,10 @@ namespace Hangman
         {
             if(IsValidCharacter(c) == false)
                 return false;
+            if (guessedCharacters.Contains(c))
+                return false;
+            guessedCharacters.Add(c);
             return true;
-            // throw new NotImplementedException();
         }
 
         private bool IsValidCharacter(char c)
