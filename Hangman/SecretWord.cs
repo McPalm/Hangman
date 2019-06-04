@@ -21,9 +21,11 @@ namespace Hangman
         public string GetPartiallySolved(Func<char, bool> CharIsKnown)
         {
             var chars = new char[Word.Length];
+            string lower = Word.ToLower();
+            string upper = Word.ToUpper();
             for (int i = 0; i < chars.Length; i++)
             {
-                if (Word[i] == ' ' || CharIsKnown(Word[i]))
+                if (Word[i] == ' ' || CharIsKnown(lower[i]) || CharIsKnown(upper[i]) )
                     chars[i] = Word[i];
                 else
                     chars[i] = '_';
