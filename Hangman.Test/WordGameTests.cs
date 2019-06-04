@@ -100,18 +100,30 @@ namespace Hangman.Test
             Assert.That(result, Is.EqualTo(expected));
         }
         [Test]
-        public void VisibleWord_Solved_AfterWinning()
+        public void Solved_AfterWinning()
         {
             MockSecretWord.Setup(sw => sw.IsSolvedBy(It.IsAny<Func<char, bool>>())).Returns(true);
             var expected = Game.Solved;
             Assert.IsTrue(expected);
         }
         [Test]
-        public void VisibleWord_GameOver_AfterWinning()
+        public void GameOver_AfterWinning()
         {
             MockSecretWord.Setup(sw => sw.IsSolvedBy(It.IsAny<Func<char, bool>>())).Returns(true);
             var expected = Game.GameOver;
             Assert.IsTrue(expected);
+        }
+
+        [Test]
+        [TestCase("")]
+        [TestCase("a")]
+        [TestCase("asd")]
+        public void GuessedCharacter_AfterGuessing_ContainsExpectedCharacters(string guesses)
+        {
+            foreach (char c in guesses.ToCharArray())
+                Game.MakeAGuess(c);
+            var returns = Game.GuessedCharacters;
+            Assert.That(returns, Is.EquivalentTo(guesses.ToCharArray()));
         }
     }
 }

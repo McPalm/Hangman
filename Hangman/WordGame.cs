@@ -8,7 +8,7 @@ namespace Hangman
     public class WordGame
     {
         public int TotalGuesses => guessedCharacters.Count;
-        public IEnumerator<char> GuessedCharacters => guessedCharacters.GetEnumerator();
+        public IEnumerable<char> GuessedCharacters => new List<char>(guessedCharacters);
         /// <summary>
         /// True if the game is over, whenever or not we won
         /// </summary>
