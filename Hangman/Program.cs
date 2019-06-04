@@ -22,17 +22,25 @@ namespace Hangman
 
         static void CompleteLoop()
         {
+            int wins = 0;
+            int games = 0;
             var words = new WordPicker();
             do
             {
-                GameLoop(words.Next());
+                games++;
+                if (GameLoop(words.Next()))
+                    wins++;
                 Console.WriteLine();
+                Console.WriteLine($"You have won {wins} game out of {games} played.");
                 Console.WriteLine("Play again? (y/n)");
 
             } while (words.HasNext && ConfirmYN());
             Console.Clear();
             if (words.HasNext == false)
+            {
                 Console.WriteLine("Out of words...");
+                Console.WriteLine($"You won {wins} game out of {games} played.");
+            }
             Console.WriteLine("Thank you for playing!");
         }
 
@@ -48,7 +56,7 @@ namespace Hangman
             }
         }
 
-        static void GameLoop(string word)
+        static bool GameLoop(string word)
         {
             var secret = new SecretWord(word);
             var game = new WordGame(secret, 10);
@@ -76,6 +84,7 @@ namespace Hangman
 
                 RenderSet(game, 10);
             }
+            return game.Solved;
         }
 
         static void RenderSet(WordGame game, int maxGuesses)
