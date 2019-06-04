@@ -103,15 +103,15 @@ namespace Hangman.Test
         public void Solved_AfterWinning()
         {
             MockSecretWord.Setup(sw => sw.IsSolvedBy(It.IsAny<Func<char, bool>>())).Returns(true);
-            var expected = Game.Solved;
-            Assert.IsTrue(expected);
+            var result = Game.Solved;
+            Assert.IsTrue(result);
         }
         [Test]
         public void GameOver_AfterWinning()
         {
             MockSecretWord.Setup(sw => sw.IsSolvedBy(It.IsAny<Func<char, bool>>())).Returns(true);
-            var expected = Game.GameOver;
-            Assert.IsTrue(expected);
+            var result = Game.GameOver;
+            Assert.IsTrue(result);
         }
 
         [Test]
@@ -122,8 +122,8 @@ namespace Hangman.Test
         {
             foreach (char c in guesses.ToCharArray())
                 Game.MakeAGuess(c);
-            var returns = Game.GuessedCharacters;
-            Assert.That(returns, Is.EquivalentTo(guesses.ToCharArray()));
+            var result = Game.GuessedCharacters;
+            Assert.That(result, Is.EquivalentTo(guesses.ToCharArray()));
         }
 
         [Test]
