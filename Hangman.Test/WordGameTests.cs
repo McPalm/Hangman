@@ -10,13 +10,13 @@ namespace Hangman.Test
     class WordGameTests
     {
         WordGame Game { get; set; }
-        Mock<ISecretWord> MoqSecretWord { get; set; }
+        Mock<ISecretWord> MockSecretWord { get; set; }
 
         [SetUp]
         public void SetUp()
         {
-            MoqSecretWord = new Mock<ISecretWord>();
-            Game = new WordGame(MoqSecretWord.Object, 10);
+            MockSecretWord = new Mock<ISecretWord>();
+            Game = new WordGame(MockSecretWord.Object, 10);
         }
 
         [Test]
@@ -91,13 +91,27 @@ namespace Hangman.Test
         [TestCase(12, 10, true)]
         public void GameOver_AfterXGuesses(int guesses, int max, bool expected)
         {
-            Game = new WordGame(MoqSecretWord.Object, max);
+            Game = new WordGame(MockSecretWord.Object, max);
             for (int i = 0; i < guesses; i++)
             {
                 Game.MakeAGuess((char)('a' + i));
             }
             var result = Game.GameOver;
             Assert.That(result, Is.EqualTo(expected));
+        }
+        [Test]
+        public void VisibleWord_Solved_AfterWinning()
+        {
+            MockSecretWord.Setup(sw => sw.IsSolvedBy(It.IsAny<Func<char, bool>>())).Returns(true);
+            var expected = Game.Solved;
+            Assert.IsTrue(expected);
+        }
+        [Test]
+        public void VisibleWord_GameOver_AfterWinning()
+        {
+            MockSecretWord.Setup(sw => sw.IsSolvedBy(It.IsAny<Func<char, bool>>())).Returns(true);
+            var expected = Game.GameOver;
+            Assert.IsTrue(expected);
         }
     }
 }
