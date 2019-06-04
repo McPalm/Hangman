@@ -82,5 +82,22 @@ namespace Hangman.Test
             var result = Game.TotalGuesses;
             Assert.That(result, Is.EqualTo(1));
         }
+
+        [Test]
+        [TestCase(0, 10, false)]
+        [TestCase(9, 10, false)]
+        [TestCase(9, 9, true)]
+        [TestCase(10, 10, true)]
+        [TestCase(12, 10, true)]
+        public void GameOver_AfterXGuesses(int guesses, int max, bool expected)
+        {
+            Game = new WordGame(MoqSecretWord.Object, max);
+            for (int i = 0; i < guesses; i++)
+            {
+                Game.MakeAGuess((char)('a' + i));
+            }
+            var result = Game.GameOver;
+            Assert.That(result, Is.EqualTo(expected));
+        }
     }
 }
