@@ -40,10 +40,7 @@ namespace Hangman
             c = Char.ToLower(c);
             if(IsValidCharacter(c) == false)
                 return false;
-            if (guessedCharacters.Contains(c))
-                return false;
-            guessedCharacters.Add(c);
-            return true;
+            return guessedCharacters.Add(c);
         }
 
         private bool IsValidCharacter(char c)
