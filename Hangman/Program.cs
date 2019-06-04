@@ -33,9 +33,16 @@ namespace Hangman
                 { 
 
                 }
-                else
+                else if(input.Length > 1)
                 {
-                    Console.WriteLine("Guesses has to be single characters");
+                    game.MakeAGuess(input);
+                }
+                else if(input.Length > 0)
+                {
+                    if (WordGame.IsValidCharacter(input[0]))
+                        Console.WriteLine("Cannot guess the same letter twice.");
+                    else
+                        Console.WriteLine("Only letters a-z is accepted");
                     Console.ReadKey();
                 }
 
@@ -47,7 +54,7 @@ namespace Hangman
         {
             Console.Clear();
             Console.WriteLine($"{game.VisibleWord}");
-            var guessed = string.Join(' ', game.GuessedCharacters);
+            var guessed = string.Join(' ', game.IncorrecteGuesses);
             Console.WriteLine(guessed);
             
 
@@ -59,7 +66,13 @@ namespace Hangman
                     Console.WriteLine($"You lose!");
             }
             else
-                Console.WriteLine($"{maxGuesses - game.TotalGuesses} guesses left..");
+            {
+                var left = maxGuesses - game.TotalGuesses;
+                if (left == 1)
+                    Console.WriteLine("Last guess! Make it count");
+                else
+                    Console.WriteLine($"{left} guesses left..");
+            }
         }
     }
 }

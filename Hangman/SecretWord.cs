@@ -39,5 +39,7 @@ namespace Hangman
         {
             return !GetPartiallySolved(CharIsKnown).Contains('_');
         }
+
+        public bool IsWord(string s) => String.Equals(Word, s, StringComparison.OrdinalIgnoreCase);
     }
 }

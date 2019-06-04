@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,11 +8,13 @@ namespace Hangman
 {
     public class WordGame
     {
-        public int TotalGuesses => guessedCharacters.Count;
+        public int TotalGuesses { get; private set; }
         public IEnumerable<char> GuessedCharacters => new List<char>(guessedCharacters);
         /// <summary>
         /// True if the game is over, whenever or not we won
         /// </summary>
+        public IEnumerable<char> CorrectGuesses => GuessedCharacters.Where(c => SecretWord.Contains(c));
+        public IEnumerable<char> IncorrecteGuesses => GuessedCharacters.Where(c => !SecretWord.Contains(c));
         public bool GameOver => TotalGuesses >= GuessLimit || Solved;
         public bool Solved => SecretWord.IsSolvedBy(guessedCharacters.Contains);
         /// <summary>
@@ -40,10 +43,32 @@ namespace Hangman
             c = Char.ToLower(c);
             if(IsValidCharacter(c) == false)
                 return false;
-            return guessedCharacters.Add(c);
+            if(guessedCharacters.Add(c))
+            {
+                TotalGuesses++;
+                return true;
+            }
+            return false;
         }
 
-        private bool IsValidCharacter(char c)
+        public bool MakeAGuess(string word)
+        {
+            foreach (char c in word)
+                if (IsValidCharacter(c) == false && c != ' ')
+                    return false;
+
+            if(SecretWord.IsWord(word))
+            {
+                foreach (var c in word)
+                {
+                    guessedCharacters.Add(c);
+                }
+            }
+            TotalGuesses++;
+            return true;
+        }
+
+        static public bool IsValidCharacter(char c)
         {
             return (c >= 'a' && c <= 'z')
                 || (c >= 'A' && c <= 'Z');

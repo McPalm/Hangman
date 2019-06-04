@@ -48,6 +48,18 @@ namespace Tests
             Assert.That(result, Is.EqualTo(result));
         }
 
+        [Test]
+        [TestCase("a", "A", true)]
+        [TestCase("baba", "baba", true)]
+        [TestCase("a", "b", false)]
+        [TestCase("b", "a", false)]
+        public void IsWord(string a, string b, bool expected)
+        {
+            var secret = new SecretWord(a);
+            var result = secret.IsWord(b);
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
         System.Func<char, bool> KnownCharFunction(string known)
         {
             return (c) => {
