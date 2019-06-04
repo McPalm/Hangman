@@ -33,7 +33,7 @@ namespace Hangman
 
         public bool IsSolvedBy(Func<char, bool> CharIsKnown)
         {
-            throw new NotImplementedException();
+            return !GetPartiallySolved(CharIsKnown).Contains('_');
         }
     }
 }

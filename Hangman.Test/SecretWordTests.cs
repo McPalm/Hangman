@@ -21,6 +21,19 @@ namespace Tests
             var result = secretWord.GetPartiallySolved(KnownCharFunction(known));
             Assert.That(result, Is.EqualTo(expected));
         }
+        [Test]
+        [TestCase("Hi", "", false)]
+        [TestCase("Hi", "ih", true)]
+        [TestCase("Hello World", "hello world", true)]
+        [TestCase("Hello World", "helloworld", true)]
+        [TestCase("Hello World", "hell word", true)]
+        [TestCase("This is not a word", "hello world", false)]
+        public void IsSolvedBy(string word, string known, bool expected)
+        {
+            var secretWord = new SecretWord(word);
+            var result = secretWord.IsSolvedBy(KnownCharFunction(known));
+            Assert.That(result, Is.EqualTo(expected));
+        }
 
 
         System.Func<char, bool> KnownCharFunction(string known)
