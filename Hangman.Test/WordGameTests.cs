@@ -44,5 +44,14 @@ namespace Hangman.Test
             var result = Game.MakeAGuess(c);
             Assert.IsTrue(result);
         }
+
+        [Test]
+
+        public void MakeAGuess_SameCharacter_ReturnsFalse()
+        {
+            Game.MakeAGuess('a');
+            var result = Game.MakeAGuess('a');
+            Assert.IsFalse(result);
+        }
     }
 }
