@@ -53,5 +53,27 @@ namespace Hangman.Test
             var result = Game.MakeAGuess('a');
             Assert.IsFalse(result);
         }
+
+        [Test]
+        public void TotalGuesses_ThreeUniqueGuesses_Returns3()
+        {
+            Game.MakeAGuess('a');
+            Game.MakeAGuess('b');
+            Game.MakeAGuess('c');
+
+            var result = Game.TotalGuesses;
+            Assert.That(result, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void TotalGuesses_GuessSameThreeTimes_Returns2()
+        {
+            Game.MakeAGuess('a');
+            Game.MakeAGuess('a');
+            Game.MakeAGuess('a');
+
+            var result = Game.TotalGuesses;
+            Assert.That(result, Is.EqualTo(1));
+        }
     }
 }
