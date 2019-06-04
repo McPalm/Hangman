@@ -125,5 +125,16 @@ namespace Hangman.Test
             var returns = Game.GuessedCharacters;
             Assert.That(returns, Is.EquivalentTo(guesses.ToCharArray()));
         }
+
+        [Test]
+        public void VisibleWord_Request_ValueProvidedBySecretWord()
+        {
+            string word = "Hell_ w_rld";
+            MockSecretWord.Setup(sw => sw.GetPartiallySolved(It.IsAny<Func<char, bool>>())).Returns(word);
+
+            var result = Game.VisibleWord;
+            Assert.That(word, Is.EqualTo(result));
+            
+        }
     }
 }
